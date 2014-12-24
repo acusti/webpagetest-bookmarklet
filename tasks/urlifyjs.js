@@ -5,7 +5,7 @@
 module.exports = function(grunt) {
 	'use strict';
 
-	grunt.registerMultiTask('urlifyjs', 'Make JS work as bookmarklet javascript: URL', function() {
+	grunt.registerMultiTask('urlifyjs', 'Make JS work as bookmarklet “javascript:” URL', function() {
 		this.files.forEach(function(file) {
 			var validFile,
 			    srcFile,
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 			srcFile = validFile.map(grunt.file.read)
 				.join(grunt.util.normalizelf(grunt.util.linefeed));
 			destFile = validFile.map(function(file) {
-				return 'javascript:' + encodeURIComponent(grunt.file.read(file));
+				return 'javascript:' + encodeURI(grunt.file.read(file));
 			}).join('');
 
 			if (destFile.length < 1) {
