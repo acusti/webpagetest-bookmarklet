@@ -243,7 +243,9 @@
     },
     h2: {
       color: 'rgb(60, 60, 60)',
-      lineHeight: '1.3',
+      lineHeight: '1.2',
+      textShadow: 'inherit',
+      margin: '0.5em 0',
     },
     button: {
       fontFamily: fontFamily,
@@ -254,11 +256,13 @@
       borderRadius: '0.25em',
       padding: '0.25em 0.55em',
       marginTop: '0.5em',
+      textShadow: 'inherit',
     },
     label: {
       overflow: 'hidden',
       lineHeight: '1.5',
       color: 'rgb(90, 90, 90)',
+      textShadow: 'inherit',
     },
     input: {
       text: {
