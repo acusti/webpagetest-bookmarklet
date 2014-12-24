@@ -145,7 +145,7 @@
       }, this);
 
       return (
-        <p>
+        <p style={styles.p}>
           {isRadio ? this.props.label : ''}
           {optionNodes}
         </p>
@@ -221,7 +221,10 @@
     };
   })();
   var fontFamily = '"Myriad Pro", "Myriad Set Pro", Myriad, "Helvetica Neue", Helvetica, sans-serif',
-      accentColor = 'rgb(251, 144, 8)';
+      colors     = {
+          accent: 'rgb(251, 144, 8)',
+          text:   'rgb(60, 60, 60)',
+      };
   var styles = {
     form: {
       position: 'fixed',
@@ -242,7 +245,7 @@
       textShadow: 'none',
     },
     h2: {
-      color: 'rgb(60, 60, 60)',
+      color: colors.text,
       lineHeight: '1.2',
       textShadow: 'inherit',
       margin: '0.5em 0',
@@ -250,7 +253,7 @@
     button: {
       fontFamily: fontFamily,
       fontSize: '1.25em',
-      backgroundColor: accentColor,
+      backgroundColor: colors.accent,
       color: 'white',
       border: 'none',
       borderRadius: '0.25em',
@@ -261,8 +264,12 @@
     label: {
       overflow: 'hidden',
       lineHeight: '1.5',
-      color: 'rgb(90, 90, 90)',
+      color: colors.text,
       textShadow: 'inherit',
+    },
+    p: {
+        color: colors.text,
+        margin: '0',
     },
     input: {
       text: {
