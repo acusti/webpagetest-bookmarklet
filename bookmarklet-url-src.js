@@ -1,7 +1,7 @@
 (function() {
 	var loadBookmarklet = function() {
 		var scriptBookmarklet = document.createElement('script');
-		scriptBookmarklet.url = 'https://cdn.rawgit.com/acusti/webpagetest-bookmarklet/master/webpagetest-bookmarklet-min.js';
+		scriptBookmarklet.url = 'https://cdn.rawgit.com/acusti/webpagetest-bookmarklet/ded5e3d1bf98250048c105f08648406c0b15d20e/webpagetest-bookmarklet-min.js';
 	};
 	if (window.React === undefined) {
 		var scriptReact = document.createElement('script');
