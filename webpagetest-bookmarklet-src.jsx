@@ -239,9 +239,11 @@
       margin: '0 auto',
       fontSize: '14px',
       fontFamily: fontFamily,
+      textShadow: 'none',
     },
     h2: {
       color: 'rgb(60, 60, 60)',
+      lineHeight: '1.3',
     },
     button: {
       fontFamily: fontFamily,
@@ -251,7 +253,7 @@
       border: 'none',
       borderRadius: '0.25em',
       padding: '0.25em 0.55em',
-      transform: 'translate(-50%, 0)',
+      marginTop: '0.5em',
     },
     label: {
       overflow: 'hidden',
