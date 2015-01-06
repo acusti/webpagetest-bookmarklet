@@ -1,7 +1,18 @@
 /** @jsx React.DOM */
 (function() {
+  var widgetClass = 'acusti-run-webpagetest-widget',
+      WPTForm,
+      WPTField,
+      WPTCloseButton,
+      fieldsData,
+      fontFamily,
+      colors,
+      styles,
+      container;
 
-  var WPTForm = React.createClass({
+  // React components
+  // ----------------
+  WPTForm = React.createClass({
     // Default options
     fieldsDefaults: [
       {
@@ -107,7 +118,7 @@
     }
   });
 
-  var WPTField = React.createClass({
+  WPTField = React.createClass({
     getInitialState: function() {
       return {
         value: this.props.value
@@ -153,7 +164,7 @@
     }
   });
 
-  var WPTCloseButton = React.createClass({
+  WPTCloseButton = React.createClass({
     handleClick: function(event) {
       React.unmountComponentAtNode(container);
     },
@@ -176,7 +187,9 @@
     }
   });
 
-  var fieldsData = (function() {
+  // Data layer
+  // ----------
+  fieldsData = (function() {
     var isCodepen = location.hostname.indexOf('codepen.io') > -1,
         data      = JSON.parse(localStorage.wpt_options || '{}'),
         custom    = {
@@ -220,12 +233,15 @@
       }
     };
   })();
-  var fontFamily = '"Myriad Pro", "Myriad Set Pro", Myriad, "Helvetica Neue", Helvetica, sans-serif',
-      colors     = {
-          accent: 'rgb(251, 144, 8)',
-          text:   'rgb(60, 60, 60)',
-      };
-  var styles = {
+
+  // Styling
+  // -------
+  fontFamily = '"Myriad Pro", "Myriad Set Pro", Myriad, "Helvetica Neue", Helvetica, sans-serif';
+  colors     = {
+      accent: 'rgb(251,144,8)',
+      text:   'rgb(60,60,60)',
+  };
+  styles = {
     form: {
       position: 'fixed',
       width: '50%',
@@ -303,7 +319,8 @@
     }
   };
 
-  var container = document.createElement('div');
+  container = document.createElement('div');
+  container.className = widgetClass;
   document.body.appendChild(container);
   React.render(<WPTForm />, container);
 }());
