@@ -271,6 +271,7 @@
       backgroundColor: 'white',
       padding: '0 1em 1em',
       margin: '0 auto',
+      textAlign: 'left',
       fontSize: '14px',
       fontFamily: fontFamily,
       textShadow: 'none',
@@ -280,6 +281,9 @@
       lineHeight: '1.2',
       textShadow: 'inherit',
       margin: '0.5em 0',
+      fontFamily: 'inherit',
+      fontSize: '1.5em',
+      fontWeight: '600',
     },
     button: {
       fontFamily: fontFamily,
@@ -300,14 +304,20 @@
     },
     p: {
         color: colors.text,
-        margin: '0',
+        margin: '0.5em 0',
+        padding: '0',
+        clear: 'right',
+        textAlign: 'left',
     },
     input: {
       text: {
         float: 'right',
         padding: '0.2em 0.4em',
+        margin: '0',
         width: '60%',
-        boxModel: 'border-box',
+        boxSizing: 'border-box',
+        minHeight: '1.7em',
+        maxHeight: '1.7em',
       },
       radio: {
         margin: '0 0.5em 0 1em'
