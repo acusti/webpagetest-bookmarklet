@@ -99,8 +99,8 @@
 
       evt.preventDefault();
 
-      for (i = 0; i < this.state.options.length; i++) {
-        query += '&' + this.state.options[i].key + '=' + encodeURIComponent(this.state.options[i].value);
+      for (i = 0; i < this.state.fields.length; i++) {
+        query += '&' + this.state.fields[i].key + '=' + encodeURIComponent(this.state.fields[i].value);
       }
       window.open(url_base + query.substr(1));
       React.unmountComponentAtNode(container);
