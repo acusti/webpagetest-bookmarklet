@@ -2,6 +2,8 @@
  * Run within context of Node + Grunt and return
  */
 
+/* jshint scripturl: true */
+
 module.exports = function(grunt) {
 	'use strict';
 

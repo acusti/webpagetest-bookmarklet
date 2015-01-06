@@ -1,0 +1,22 @@
+{
+  "name": "webpagetest-bookmarklet",
+  "main": "Gruntfile.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/acusti/webpagetest-bookmarklet",
+  "authors": [
+    "Andrew Patton <andrew@acusti.ca>"
+  ],
+  "description": "Bookmarklet to send current page as test to webpagetest.org",
+  "license": "UNLICENSE",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.12.2"
+  }
+}

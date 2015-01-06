@@ -1,7 +1,24 @@
 /** @jsx React.DOM */
 (function() {
+  var widgetClass = 'acusti-run-webpagetest-widget',
+      WPTForm,
+      WPTField,
+      WPTCloseButton,
+      removeWidget,
+      fieldsData,
+      fontFamily,
+      colors,
+      styles,
+      container;
 
-  var WPTForm = React.createClass({displayName: "WPTForm",
+  // If widget already exists on the page, do nothing
+  if (document.getElementsByClassName(widgetClass).length) {
+      return;
+  }
+
+  // React components
+  // ----------------
+  WPTForm = React.createClass({displayName: "WPTForm",
     // Default options
     fieldsDefaults: [
       {
@@ -99,15 +116,15 @@
 
       evt.preventDefault();
 
-      for (i = 0; i < this.state.options.length; i++) {
-        query += '&' + this.state.options[i].key + '=' + encodeURIComponent(this.state.options[i].value);
+      for (i = 0; i < this.state.fields.length; i++) {
+        query += '&' + this.state.fields[i].key + '=' + encodeURIComponent(this.state.fields[i].value);
       }
       window.open(url_base + query.substr(1));
-      React.unmountComponentAtNode(container);
+      removeWidget();
     }
   });
 
-  var WPTField = React.createClass({displayName: "WPTField",
+  WPTField = React.createClass({displayName: "WPTField",
     getInitialState: function() {
       return {
         value: this.props.value
@@ -136,7 +153,7 @@
         }
         // Use defaultValue and defaultChecked for uncontrolled input components
         return (
-          React.createElement("label", {style: styles.label}, 
+          React.createElement("label", {style: styles.label, key: id}, 
             !isRadio ? option.label : '', 
             React.createElement("input", {type: type, onChange: this.handleChange, style: styles.input[type], id: id, name: name, defaultValue: option.value, required: isRequired, defaultChecked: isRadio && parseInt(this.state.value, 10) === parseInt(option.value, 10)}), 
             isRadio ? option.label : ''
@@ -153,9 +170,9 @@
     }
   });
 
-  var WPTCloseButton = React.createClass({displayName: "WPTCloseButton",
+  WPTCloseButton = React.createClass({displayName: "WPTCloseButton",
     handleClick: function(event) {
-      React.unmountComponentAtNode(container);
+      removeWidget();
     },
     render: function() {
       return (
@@ -176,7 +193,18 @@
     }
   });
 
-  var fieldsData = (function() {
+  // Remove, cleanup widget
+  // ----------------------
+  removeWidget = function() {
+    React.unmountComponentAtNode(container);
+    if (container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+  };
+
+  // Data layer
+  // ----------
+  fieldsData = (function() {
     var isCodepen = location.hostname.indexOf('codepen.io') > -1,
         data      = JSON.parse(localStorage.wpt_options || '{}'),
         custom    = {
@@ -220,12 +248,15 @@
       }
     };
   })();
-  var fontFamily = '"Myriad Pro", "Myriad Set Pro", Myriad, "Helvetica Neue", Helvetica, sans-serif',
-      colors     = {
-          accent: 'rgb(251, 144, 8)',
-          text:   'rgb(60, 60, 60)',
-      };
-  var styles = {
+
+  // Styling
+  // -------
+  fontFamily = '"Myriad Pro", "Myriad Set Pro", Myriad, "Helvetica Neue", Helvetica, sans-serif';
+  colors     = {
+      accent: 'rgb(251,144,8)',
+      text:   'rgb(60,60,60)',
+  };
+  styles = {
     form: {
       position: 'fixed',
       width: '50%',
@@ -240,6 +271,7 @@
       backgroundColor: 'white',
       padding: '0 1em 1em',
       margin: '0 auto',
+      textAlign: 'left',
       fontSize: '14px',
       fontFamily: fontFamily,
       textShadow: 'none',
@@ -249,6 +281,9 @@
       lineHeight: '1.2',
       textShadow: 'inherit',
       margin: '0.5em 0',
+      fontFamily: 'inherit',
+      fontSize: '1.5em',
+      fontWeight: '600',
     },
     button: {
       fontFamily: fontFamily,
@@ -269,14 +304,20 @@
     },
     p: {
         color: colors.text,
-        margin: '0',
+        margin: '0.5em 0',
+        padding: '0',
+        clear: 'right',
+        textAlign: 'left',
     },
     input: {
       text: {
         float: 'right',
         padding: '0.2em 0.4em',
+        margin: '0',
         width: '60%',
-        boxModel: 'border-box',
+        boxSizing: 'border-box',
+        minHeight: '1.7em',
+        maxHeight: '1.7em',
       },
       radio: {
         margin: '0 0.5em 0 1em'
@@ -303,7 +344,8 @@
     }
   };
 
-  var container = document.createElement('div');
+  container = document.createElement('div');
+  container.className = widgetClass;
   document.body.appendChild(container);
   React.render(React.createElement(WPTForm, null), container);
 }());
