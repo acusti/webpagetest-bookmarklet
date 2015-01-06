@@ -4,11 +4,17 @@
       WPTForm,
       WPTField,
       WPTCloseButton,
+      removeWidget,
       fieldsData,
       fontFamily,
       colors,
       styles,
       container;
+
+  // If widget already exists on the page, do nothing
+  if (document.getElementsByClassName(widgetClass).length) {
+      return;
+  }
 
   // React components
   // ----------------
@@ -114,7 +120,7 @@
         query += '&' + this.state.fields[i].key + '=' + encodeURIComponent(this.state.fields[i].value);
       }
       window.open(url_base + query.substr(1));
-      React.unmountComponentAtNode(container);
+      removeWidget();
     }
   });
 
@@ -166,7 +172,7 @@
 
   WPTCloseButton = React.createClass({
     handleClick: function(event) {
-      React.unmountComponentAtNode(container);
+      removeWidget();
     },
     render: function() {
       return (
@@ -186,6 +192,15 @@
       );
     }
   });
+
+  // Remove, cleanup widget
+  // ----------------------
+  removeWidget = function() {
+    React.unmountComponentAtNode(container);
+    if (container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+  };
 
   // Data layer
   // ----------
