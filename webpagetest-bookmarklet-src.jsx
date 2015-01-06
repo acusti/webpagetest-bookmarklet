@@ -153,7 +153,7 @@
         }
         // Use defaultValue and defaultChecked for uncontrolled input components
         return (
-          <label style={styles.label}>
+          <label style={styles.label} key={id}>
             {!isRadio ? option.label : ''}
             <input type={type} onChange={this.handleChange} style={styles.input[type]} id={id} name={name} defaultValue={option.value} required={isRequired} defaultChecked={isRadio && parseInt(this.state.value, 10) === parseInt(option.value, 10)} />
             {isRadio ? option.label : ''}
